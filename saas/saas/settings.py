@@ -49,6 +49,7 @@ INSTALLED_APPS = [
 
     'tasks',
     'users',
+    'companies',
 
 ]
 SITE_ID = 1
