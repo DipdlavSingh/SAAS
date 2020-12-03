@@ -1,6 +1,6 @@
 import uuid
 from django.db import models
-from saas.users.models import User
+from users.models import User
 
 # Create your models here.
 
@@ -21,7 +21,7 @@ class Task(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     title = models.CharField(max_length=50)
     description = models.CharField(max_length=100, blank=True)
-    assignee = models.ForeignKey(User, related_name="tasks", blank=True)
+    assignee = models.ForeignKey(User, related_name="tasks", blank=True, on_delete=models.CASCADE)
     status = models.CharField(
         choices=COMPLETION_STATUS, default=COMPLETION_STATUS[0][0], max_length=32)
     priority = models.CharField(

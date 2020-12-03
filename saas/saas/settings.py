@@ -48,6 +48,8 @@ INSTALLED_APPS = [
     'rest_auth.registration',
 
     'tasks',
+    'users',
+
 ]
 SITE_ID = 1
 
@@ -116,6 +118,8 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.TokenAuthentication',
     ),
 }
+
+AUTH_USER_MODEL = "users.User" 
 
 
 # Internationalization
