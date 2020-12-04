@@ -20,9 +20,14 @@ class TaskView(GenericAPIView):
 
     def get(self, request):
         id = request.data.get('id', None)
-        tasks = Task.objects.filter(id=id).all()
-        serializer = TaskViewSerializer(tasks, many=True)
-        return Response(serializer.data)
+        if id:
+            tasks = Task.objects.filter(id=id).all()
+            serializer = TaskViewSerializer(tasks, many=True)
+            return Response(serializer.data)
+        else:
+            tasks = Task.objects.filter(company=request.user.company).all()
+            serializer = TaskViewSerializer(tasks, many=True)
+            return Response(serializer.data)
 
     def post(self, request):
         data = request.data
@@ -35,8 +40,8 @@ class TaskView(GenericAPIView):
     def put(self, request):
         data = request.data
         task_id = request.data.get('id', None)
-        Task.objects.filter(id=task_id).first()
-        serializer = TaskViewSerializer(Task, data=data, partial=True)
+        task = Task.objects.filter(id=task_id).first()
+        serializer = TaskViewSerializer(task, data=data, partial=True)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
