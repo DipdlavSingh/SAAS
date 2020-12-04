@@ -31,3 +31,13 @@ class TaskView(GenericAPIView):
             serializer.save(assignee=request.user, company=request.user.company)
             return Response(serializer.data)
         return Response(serializer.errors)
+
+    def put(self, request):
+        data = request.data
+        task_id = request.data.get('id', None)
+        Task.objects.filter(id=task_id).first()
+        serializer = TaskViewSerializer(Task, data=data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors)
