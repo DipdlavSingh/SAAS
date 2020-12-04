@@ -9,7 +9,7 @@ class Company(models.Model):
     description = models.CharField(max_length=100, blank=True)
     address = models.CharField(max_length=100, blank=True)
     owner = models.OneToOneField('users.User', related_name="owns_company", 
-        on_delete=models.CASCADE, blank=True, null=True)
+        on_delete=models.CASCADE)
     
     created_at = models.DateTimeField(auto_now_add=True)
     modified_at = models.DateTimeField(auto_now=True)

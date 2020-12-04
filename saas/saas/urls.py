@@ -23,5 +23,7 @@ urlpatterns = [
 
     path('tasks/', include('tasks.urls')),
     path('user/', include('users.urls')),
+    path('company/', include('companies.urls')),
+
 
 ]
