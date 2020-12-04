@@ -33,3 +33,10 @@ class Task(models.Model):
     
     created_at = models.DateTimeField(auto_now_add=True)
     modified_at = models.DateTimeField(auto_now=True)
+
+    def save(self, *args, **kwargs):
+        valid_values = [x for x,y in COMPLETION_STATUS]
+        if self.status in valid_values:
+            super().save(*args, **kwargs)
+        else:
+            raise Exception("Invalid Status") 
