@@ -1,6 +1,8 @@
 import uuid
 from django.db import models
 from users.models import User
+from companies.models import Company
+
 
 # Create your models here.
 
@@ -26,6 +28,8 @@ class Task(models.Model):
         choices=COMPLETION_STATUS, default=COMPLETION_STATUS[0][0], max_length=32)
     priority = models.CharField(
         choices=PRIORITIES, default=PRIORITIES[0][0], max_length=32)
+    company = models.ForeignKey(Company, related_name="tasks", 
+        blank=True, null=True, on_delete=models.CASCADE)
     
     created_at = models.DateTimeField(auto_now_add=True)
     modified_at = models.DateTimeField(auto_now=True)
